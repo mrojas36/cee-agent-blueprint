@@ -1,0 +1,40 @@
+{
+  "name": "cee-agent-bridge",
+  "displayName": "CEE Agent Bridge",
+  "description": "Passively warms the ShiftCore CEE Hardware Anchor Bank via the CEE CLI.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "cee.groundMission",
+        "title": "CEE: Ground Mission to Ghost Tier"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "when": "editorHasSelection",
+          "command": "cee.groundMission",
+          "group": "cee_group@1"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.80.0",
+    "@types/node": "18.x",
+    "typescript": "^5.1.3"
+  }
+}

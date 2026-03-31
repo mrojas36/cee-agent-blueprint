@@ -1,0 +1,33 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run Extension",
+      "type": "extensionHost",
+      "request": "launch",
+      "runtimeExecutable": "${execPath}",
+      "args": [
+        "--extensionDevelopmentPath=${workspaceFolder}"
+      ],
+      "outFiles": [
+        "${workspaceFolder}/out/**/*.js"
+      ],
+      "preLaunchTask": "compile-extension"
+    },
+    {
+      "name": "Run Daemon",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/../dist/daemon.cjs",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}/..",
+      "preLaunchTask": "build-daemon"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Debug Bridge (Daemon + Extension)",
+      "configurations": ["Run Daemon", "Run Extension"]
+    }
+  ]
+}

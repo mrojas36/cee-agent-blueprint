@@ -1,0 +1,29 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "compile-extension",
+      "type": "npm",
+      "script": "compile",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "panel": "dedicated"
+      },
+      "problemMatcher": [
+        "$tsc"
+      ]
+    },
+    {
+      "label": "build-daemon",
+      "type": "shell",
+      "command": "cd ../../claude-code-source-code && npx esbuild ../cee-agent-blueprint/cli/bridge/daemon.ts --bundle --platform=node --outfile=../cee-agent-blueprint/dist/daemon.cjs",
+      "group": "build",
+      "presentation": {
+        "reveal": "silent"
+      }
+    }
+  ]
+}
