@@ -1,47 +1,33 @@
 # Commercialization Roadmap: CEE Agent for Enterprise Modernization
 
-**Objective:** Enhance the CEE Agent blueprint to specifically target the **BlackRock SyBase Modernization** use case, leveraging insights from the Claude Code source code investigation.
+**Objective:** Enhance the CEE Agent blueprint to specifically target the **BlackRock SyBase Modernization** use case.
+
+## Strategic Pivot: "Wrap and Extend"
+Enterprise AI fails when it attempts to "rip and replace" authoritative systems of record. The winning architecture is to use AI to **wrap** the legacy estate (SyBase), creating a governed semantic access layer while leaving the transactional core intact. 
+
+The ShiftCore CEE Agent is uniquely positioned to execute this strategy safely.
 
 ---
 
-## 1. Hardware-Accelerated Semantic Mapping (LSP-on-Chip)
-**Insight from Claude Code:** Claude's `LSPTool` provides powerful call-hierarchy navigation, but is limited by the host's CPU and memory when parsing massive legacy systems.
-**CEE Feature:** **Silicon-Native Call Graph**.
-- Use the 27GB HBM Anchor Bank to store the *entire* SyBase stored procedure dependency graph.
-- Map T-SQL `EXEC` calls and table dependencies directly into the CAM.
-- **BlackRock Demo:** Show the agent traversing a 10,000-procedure web of SyBase code with 0ms "Go-to-Definition" latency, powered by hardware CAM hits.
+## 1. Hardware-Accelerated Semantic Mapping (Anchor Bank)
+**The Problem:** Legacy databases contain decades of fragmented, poorly documented schemas. Software agents suffer context overflow when trying to parse thousands of stored procedures.
+**The CEE Solution:** **Silicon-Native Call Graph**.
+- Use the CEE CLI (`/explore`) to bulk-load the entire SyBase schema and dependency graph into the 27GB HBM Anchor Bank.
+- **BlackRock Demo:** Show the agent recalling exact T-SQL syntax and table joins with 0ms latency and 0% hallucination, translating raw schema chaos into business entities (e.g., `dbo.tbl_account_pos` -> `PortfolioPosition`).
 
-## 2. The "Legacy System" Ghost (Verification & Reversibility)
-**Insight from Claude Code:** The `verificationAgent` has a "no-modification" rule and enforces migration reversibility.
-**CEE Feature:** **Verification Ghost & Reversibility Audit**.
-- Define a new Ghost Tier type: **Governance Ghost**.
-- Highlight a block of SyBase T-SQL logic and "Ground" it as the source of truth.
-- As the CEE generates modern TypeScript logic, the **L7 Judgment Controller** audits the new logic's AST against the legacy Ghost in real-time.
-- If the generated logic deviates from the financial calculation rules in the SyBase original, the hardware triggers a beam search steer.
+## 2. Financial Data Governance (Ghost Tier + L7 Audit)
+**The Problem:** In financial services, you cannot let an AI invent definitions for risk metrics or arbitrarily change numbers via uncontrolled queries. Advisory "prompt guardrails" fail during long context generation.
+**The CEE Solution:** **Hardware-Enforced Constitutional Governance**.
+- Define strict data rules (e.g., "Enforce read-only access," "Never expose raw PII") and ground them into the **Ghost Tier** as a mathematical vector.
+- **BlackRock Demo:** Instruct the agent to generate a new TypeScript API endpoint that mutates an account balance. Show the **L7 Judgment Controller** intervening in real-time, blocking the generation, and steering the beam search toward a compliant, read-only response.
 
-## 3. Mass Hardware-Accelerated Refactoring
-**Insight from Claude Code:** `FileEditTool` is a sequential, string-based edit tool.
-**CEE Feature:** **Parallel Refactor Engine**.
-- Leverage the **7,200 DSP58 lanes** to perform parallel pattern-matching across the entire HBM-mapped codebase.
-- **BlackRock Demo:** Perform a "Global Modernization" task (e.g., "Rename all SyBase `@old_param` to `@new_standard` and update associated join logic") across 5,000 files in under 2 seconds.
-
-## 4. Financial-Grade Security (Network & Heap)
-**Insight from Claude Code:** `upstreamproxy` uses `prctl` heap protection and CA injection.
-**CEE Feature:** **Isolated Inference Tunnel**.
-- The A72 processor on the V80 card maintains a hardware-encrypted tunnel directly to the CEE chip.
-- The Host CLI handles the BlackRock Enterprise Proxy (MITM) but **never sees the raw inference tokens** or the session keys.
-- Heap protection is enforced at the physical bus level—no host process can scrape the CEE's internal memory via PCIe.
+## 3. Auditable Inference (Reasoning Traces)
+**The Problem:** When an AI generates a financial report or API wrapper, auditors need to know *why* it made those decisions. "Trust me" is not an acceptable answer in heavily regulated environments.
+**The CEE Solution:** **Deterministic Reasoning Ghosts**.
+- Instead of generating textual explanations, the CEE produces a 192-byte rank-2 SVD projection of the exact beam search path.
+- **BlackRock Demo:** Export the "Hardware Reasoning Trace" to prove to compliance officers that the generated TypeScript API was built strictly according to the Grounding Ghost rules.
 
 ---
 
-## Conclusion: The "Legacy-to-Modern" Value Proposition
-
-| Feature | Claude Code (Software) | CEE Agent (Hardware) |
-|---------|------------------------|----------------------|
-| **Recall** | Linear / Fragile       | 100% / Silicon-Fixed |
-| **Logic Audit** | Advisory / Prompt-based | Constitutional / L7 Enforced |
-| **Parsing** | Host CPU / Sequential  | HBM + DSP / Parallel |
-| **Modernization** | Best-effort rewrite   | Verifiable State-Machine Transfer |
-
-**Demo Hook for BlackRock:**
-*"You have 20 years of SyBase logic that no human fully understands. Claude Code tries to remember it. The ShiftCore CEE physically cannot forget it. We are going to ground your SyBase source-of-truth into the Ghost Tier and use 7,200 DSPs to prove the modern code we generate is mathematically identical."*
+## Conclusion: The CEE Value Proposition
+*"You have 20 years of SyBase logic that no human fully understands. Claude Code tries to remember it; the ShiftCore CEE physically cannot forget it. We are not replacing your authoritative core—we are using our Anchor Bank to map it, our Ghost Tier to govern it, and our L7 Controller to prove every generated API wrapper is 100% compliant with your financial rules."*
