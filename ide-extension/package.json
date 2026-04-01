@@ -14,7 +14,15 @@
     "commands": [
       {
         "command": "cee.groundMission",
-        "title": "CEE: Ground Mission to Ghost Tier"
+        "title": "CEE: Ground Mission (Hardware Governance)"
+      },
+      {
+        "command": "cee.viewReasoningTrace",
+        "title": "CEE: View Hardware Reasoning Trace"
+      },
+      {
+        "command": "cee.diffReasoningTraces",
+        "title": "CEE: Diff Hardware Reasoning Paths"
       }
     ],
     "menus": {
@@ -23,6 +31,14 @@
           "when": "editorHasSelection",
           "command": "cee.groundMission",
           "group": "cee_group@1"
+        },
+        {
+          "command": "cee.viewReasoningTrace",
+          "group": "cee_group@2"
+        },
+        {
+          "command": "cee.diffReasoningTraces",
+          "group": "cee_group@3"
         }
       ]
     }
